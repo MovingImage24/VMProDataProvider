@@ -1,0 +1,32 @@
+{
+  "name": "movingimage/data-provider-vmpro",
+  "description": "Dataprovider implementation that retrieves collection data from Video Manager Pro",
+  "type": "library",
+  "license": "Proprietary",
+  "authors": [
+    {
+      "name": "Ruben Knol",
+      "email": "ruben.knol@movingimage.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://packagist.mi24.tv/"
+    }
+  ],
+  "config": {
+    "secure-http": false
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "movingimage/data-provider": "^1.0.0",
+    "movingimage/vmpro-api-client": "^0.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "MovingImage\\DataProvider\\": "lib/DataProvider"
+    }
+  }
+}

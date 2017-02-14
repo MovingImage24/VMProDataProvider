@@ -22,11 +22,17 @@
   "prefer-stable": true,
   "require": {
     "movingimage/data-provider": "^1.0.0",
-    "movingimage/vmpro-api-client": "^0.2.0"
+    "movingimage/vmpro-api-client": "^0.2.0",
+    "phpunit/phpunit": "^4.5 || ^5.0"
   },
   "autoload": {
     "psr-4": {
       "MovingImage\\DataProvider\\": "lib/DataProvider"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MovingImage\\DataProvider\\Tests\\": "lib/DataProvider"
     }
   }
 }

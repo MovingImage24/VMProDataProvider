@@ -50,6 +50,7 @@ class VideoManagerPro implements DataProviderInterface
             'limit'          => 'setLimit',
             'order'          => 'setOrder',
             'search_term'    => 'setSearchTerm',
+            'search_field'   => 'setSearchInField',
             'channel_id'     => 'setChannelId',
             'order_property' => 'setOrderProperty'
         ];

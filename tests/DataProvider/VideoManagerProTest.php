@@ -29,7 +29,7 @@ class VideoManagerProTest extends \PHPUnit_Framework_TestCase
             ->with($vm_id, $videoRequestParameters)
             ->will($this->returnValue($arrayCollection));
 
-        $return = $dataProvider->getData($options);
+        $return = $dataProvider->getAll($options);
         $this->assertEquals($arrayCollection, $return);
     }
 }

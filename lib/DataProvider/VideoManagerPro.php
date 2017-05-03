@@ -37,9 +37,10 @@ class VideoManagerPro implements DataProviderInterface
     }
 
     /**
-     * Converts array into VideosRequestParameters
+     * Converts array into VideosRequestParameters.
      *
      * @param array $options
+     *
      * @return VideosRequestParameters
      */
     private function createVideosRequestParameters(array $options)
@@ -47,18 +48,16 @@ class VideoManagerPro implements DataProviderInterface
         $parameters = new VideosRequestParameters();
 
         $queryMethods = [
-            'limit'          => 'setLimit',
-            'order'          => 'setOrder',
-            'search_term'    => 'setSearchTerm',
-            'search_field'   => 'setSearchInField',
-            'channel_id'     => 'setChannelId',
-            'order_property' => 'setOrderProperty'
+            'limit' => 'setLimit',
+            'order' => 'setOrder',
+            'search_term' => 'setSearchTerm',
+            'search_field' => 'setSearchInField',
+            'channel_id' => 'setChannelId',
+            'order_property' => 'setOrderProperty',
         ];
 
-        foreach ($queryMethods as $key => $method)
-        {
-            if (isset($options[$key]))
-            {
+        foreach ($queryMethods as $key => $method) {
+            if (isset($options[$key])) {
                 $parameters->$method($options[$key]);
             }
         }

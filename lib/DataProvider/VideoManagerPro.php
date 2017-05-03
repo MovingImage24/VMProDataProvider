@@ -5,6 +5,7 @@ namespace MovingImage\DataProvider;
 use MovingImage\Client\VMPro\Entity\VideosRequestParameters;
 use MovingImage\Client\VMPro\Interfaces\ApiClientInterface;
 use MovingImage\DataProvider\Interfaces\DataProviderInterface;
+use MovingImage\DataProvider\Wrapper\Video;
 
 /**
  * Class VideoManagerPro.
@@ -31,9 +32,32 @@ class VideoManagerPro implements DataProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getData(array $options)
+    public function getAll(array $options)
     {
         return $this->apiClient->getVideos($options['vm_id'], $this->createVideosRequestParameters($options));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOne(array $options)
+    {
+        $video = $this->apiClient->getVideo($options['vm_id'], $options['id']);
+        $embedCode = $this->apiClient->getEmbedCode($options['vm_id'], $options['id'], $options['embed_code_id']);
+
+        return new Video($video, $embedCode);
+    }
+
+    /**
+     * CURRENTLY NOT IMPLEMENTED.
+     *
+     * @param array $options
+     *
+     * @return int
+     */
+    public function getCount(array $options)
+    {
+        return 0;
     }
 
     /**

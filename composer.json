@@ -22,7 +22,7 @@
   "prefer-stable": true,
   "require": {
     "movingimage/data-provider": "dev-PS-651",
-    "movingimage/vmpro-api-client": "dev-master",
+    "movingimage/vmpro-api-client": "dev-huge-refactor",
     "phpunit/phpunit": "^4.5 || ^5.0"
   },
   "autoload": {

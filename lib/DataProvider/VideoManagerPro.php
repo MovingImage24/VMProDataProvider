@@ -42,8 +42,27 @@ class VideoManagerPro implements DataProviderInterface
      */
     public function getOne(array $options)
     {
-        $video = $this->apiClient->getVideo($options['vm_id'], $options['id']);
-        $embedCode = $this->apiClient->getEmbedCode($options['vm_id'], $options['id'], $options['embed_code_id']);
+        if (!isset($options['id'])) {
+            // Simply fetch the first video from the collection, but without
+            // loading all videos inside the collection
+            $options['limit'] = 1;
+
+            $videos = $this->getAll($options);
+
+            if (count($videos) === 0) {
+                return null;
+            }
+
+            $embedCode = $this->apiClient->getEmbedCode(
+                $options['vm_id'],
+                $videos[0]->getId(),
+                $options['embed_code_id']
+            );
+        } else {
+            // Retrieve the video by ID straight from the API
+            $video = $this->apiClient->getVideo($options['vm_id'], $options['id']);
+            $embedCode = $this->apiClient->getEmbedCode($options['vm_id'], $options['id'], $options['embed_code_id']);
+        }
 
         return new Video($video, $embedCode);
     }

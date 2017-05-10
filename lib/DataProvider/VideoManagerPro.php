@@ -53,6 +53,8 @@ class VideoManagerPro implements DataProviderInterface
                 return null;
             }
 
+            $video = $videos[0];
+
             $embedCode = $this->apiClient->getEmbedCode(
                 $options['vm_id'],
                 $videos[0]->getId(),

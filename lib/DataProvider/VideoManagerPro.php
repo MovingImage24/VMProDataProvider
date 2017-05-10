@@ -2,6 +2,7 @@
 
 namespace MovingImage\DataProvider;
 
+use MovingImage\Client\VMPro\Entity\VideoRequestParameters;
 use MovingImage\Client\VMPro\Entity\VideosRequestParameters;
 use MovingImage\Client\VMPro\Interfaces\ApiClientInterface;
 use MovingImage\DataProvider\Interfaces\DataProviderInterface;
@@ -62,7 +63,11 @@ class VideoManagerPro implements DataProviderInterface
             );
         } else {
             // Retrieve the video by ID straight from the API
-            $video = $this->apiClient->getVideo($options['vm_id'], $options['id']);
+            $params = new VideoRequestParameters();
+            $params->setIncludeCustomMetadata(true);
+            $params->setIncludeKeywords(true);
+
+            $video = $this->apiClient->getVideo($options['vm_id'], $options['id'], $params);
             $embedCode = $this->apiClient->getEmbedCode($options['vm_id'], $options['id'], $options['player_id']);
         }
 
@@ -91,7 +96,7 @@ class VideoManagerPro implements DataProviderInterface
     private function createVideosRequestParameters(array $options)
     {
         $parameters = new VideosRequestParameters();
-        
+
         $parameters->setIncludeChannelAssignments(true);
         $parameters->setIncludeCustomMetadata(true);
 

@@ -91,6 +91,7 @@ class VideoManagerPro implements DataProviderInterface
     private function createVideosRequestParameters(array $options)
     {
         $parameters = new VideosRequestParameters();
+        $parameters->setIncludeChannelAssignments(true);
 
         $queryMethods = [
             'limit' => 'setLimit',

@@ -99,6 +99,7 @@ class VideoManagerPro implements DataProviderInterface
 
         $parameters->setIncludeChannelAssignments(true);
         $parameters->setIncludeCustomMetadata(true);
+        $parameters->setIncludeKeywords(true);
 
         $queryMethods = [
             'limit' => 'setLimit',

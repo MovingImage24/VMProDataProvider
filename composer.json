@@ -34,5 +34,8 @@
     "psr-4": {
       "MovingImage\\DataProvider\\Tests\\": "lib/DataProvider"
     }
+  },
+  "require-dev": {
+    "movingimage/style-checker": "dev-master"
   }
 }

@@ -66,6 +66,7 @@ class VideoManagerPro implements DataProviderInterface
             $params = new VideoRequestParameters();
             $params->setIncludeCustomMetadata(true);
             $params->setIncludeKeywords(true);
+            $params->setIncludeChannelAssignments(true);
 
             $video = $this->apiClient->getVideo($options['vm_id'], $options['id'], $params);
             $embedCode = $this->apiClient->getEmbedCode($options['vm_id'], $options['id'], $options['player_id']);

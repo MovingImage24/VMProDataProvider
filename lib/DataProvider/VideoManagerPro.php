@@ -84,7 +84,7 @@ class VideoManagerPro implements DataProviderInterface
      */
     public function getCount(array $options)
     {
-        return 0;
+        return $this->apiClient->getCount($options['vm_id'], $this->createVideosRequestParameters($options));
     }
 
     /**

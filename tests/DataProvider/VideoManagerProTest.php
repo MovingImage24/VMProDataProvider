@@ -18,7 +18,11 @@ class VideoManagerProTest extends \PHPUnit_Framework_TestCase
         $limit = 4;
 
         $videoRequestParameters = new VideosRequestParameters();
-        $videoRequestParameters->set('limit', $limit);
+        $videoRequestParameters
+            ->set('include_channel_assignments', true)
+            ->set('include_custom_metadata', true)
+            ->set('include_keywords', true)
+            ->set('limit', $limit);
 
         $options = ['vm_id' => $vm_id, 'limit' => $limit];
         $arrayCollection = new ArrayCollection();

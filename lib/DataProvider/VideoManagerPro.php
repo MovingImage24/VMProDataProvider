@@ -109,6 +109,7 @@ class VideoManagerPro implements DataProviderInterface
             'search_field' => 'setSearchInField',
             'channel_id' => 'setChannelId',
             'order_property' => 'setOrderProperty',
+            'offset' => 'setOffset',
         ];
 
         foreach ($queryMethods as $key => $method) {

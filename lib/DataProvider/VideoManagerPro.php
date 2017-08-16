@@ -110,6 +110,9 @@ class VideoManagerPro implements DataProviderInterface
             'channel_id' => 'setChannelId',
             'order_property' => 'setOrderProperty',
             'offset' => 'setOffset',
+            'include_channel_assignments' => 'setIncludeChannelAssignments',
+            'include_custom_metadata' => 'setIncludeCustomMetadata',
+            'include_keywords' => 'setIncludeKeywords',
         ];
 
         foreach ($queryMethods as $key => $method) {

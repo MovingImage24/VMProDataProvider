@@ -11,9 +11,9 @@ use MovingImage\DataProvider\Wrapper\Video;
 /**
  * Class VideoManagerPro.
  *
- * @author Ruben Knol <ruben.knol@movingimage.com>
+ * @author Plotkin Konstantin <constantin.plotkin@movingimage.com>
  */
-class VideoManagerPro implements DataProviderInterface
+class VideoManagerProSearch implements DataProviderInterface
 {
     /**
      * @var ApiClientInterface
@@ -30,12 +30,20 @@ class VideoManagerPro implements DataProviderInterface
         $this->apiClient = $apiClient;
     }
 
+    /*
+     * @param array $options
+     */
+    protected function searchVideos(array $options)
+    {
+        return $this->apiClient->searchVideos($options['vm_id'], $this->createVideosRequestParameters($options));
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getAll(array $options)
     {
-        return $this->apiClient->getVideos($options['vm_id'], $this->createVideosRequestParameters($options));
+        return $this->searchVideos($options)->getVideos();
     }
 
     /**
@@ -54,23 +62,16 @@ class VideoManagerPro implements DataProviderInterface
                 return null;
             }
 
-            $video = $videos[0];
+            $video = array_shift($videos);
 
-            $embedCode = $this->apiClient->getEmbedCode(
-                $options['vm_id'],
-                $videos[0]->getId(),
-                $options['player_id']
-            );
         } else {
+
             // Retrieve the video by ID straight from the API
             $params = new VideoRequestParameters();
-            $params->setIncludeCustomMetadata(true);
-            $params->setIncludeKeywords(true);
-            $params->setIncludeChannelAssignments(true);
-
             $video = $this->apiClient->getVideo($options['vm_id'], $options['id'], $params);
-            $embedCode = $this->apiClient->getEmbedCode($options['vm_id'], $options['id'], $options['player_id']);
         }
+
+        $embedCode = $this->apiClient->getEmbedCode($options['vm_id'], $video->getId(), $options['player_id']);
 
         return new Video($video, $embedCode);
     }
@@ -84,7 +85,7 @@ class VideoManagerPro implements DataProviderInterface
      */
     public function getCount(array $options)
     {
-        return $this->apiClient->getCount($options['vm_id'], $this->createVideosRequestParameters($options));
+        return $this->searchVideos($options)->getTotalCount();
     }
 
     /**
@@ -97,10 +98,6 @@ class VideoManagerPro implements DataProviderInterface
     private function createVideosRequestParameters(array $options)
     {
         $parameters = new VideosRequestParameters();
-
-        $parameters->setIncludeChannelAssignments(true);
-        $parameters->setIncludeCustomMetadata(true);
-        $parameters->setIncludeKeywords(true);
 
         $queryMethods = [
             'limit' => 'setLimit',

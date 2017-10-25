@@ -9,7 +9,7 @@ use MovingImage\DataProvider\Interfaces\DataProviderInterface;
 use MovingImage\DataProvider\Wrapper\Video;
 
 /**
- * Class VideoManagerPro.
+ * Class VideoManagerProSearch.
  *
  * @author Plotkin Konstantin <constantin.plotkin@movingimage.com>
  */

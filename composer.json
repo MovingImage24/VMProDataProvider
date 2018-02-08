@@ -15,8 +15,8 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "movingimage/data-provider": "dev-master",
-    "movingimage/vmpro-api-client": "dev-master",
+    "movingimage/data-provider": "^3.0.0",
+    "movingimage/vmpro-api-client": "^2.0.1",
     "phpunit/phpunit": "^4.5 || ^5.0"
   },
   "autoload": {

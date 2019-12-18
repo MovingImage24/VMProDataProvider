@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MovingImage\DataProvider;
 
 use MovingImage\Client\VMPro\Entity\VideoRequestParameters;
@@ -8,11 +10,6 @@ use MovingImage\Client\VMPro\Interfaces\ApiClientInterface;
 use MovingImage\DataProvider\Interfaces\DataProviderInterface;
 use MovingImage\DataProvider\Wrapper\Video;
 
-/**
- * Class VideoManagerPro.
- *
- * @author Ruben Knol <ruben.knol@movingimage.com>
- */
 class VideoManagerPro implements DataProviderInterface
 {
     /**
@@ -20,11 +17,6 @@ class VideoManagerPro implements DataProviderInterface
      */
     private $apiClient;
 
-    /**
-     * VideoManagerPro constructor.
-     *
-     * @param ApiClientInterface $apiClient
-     */
     public function __construct(ApiClientInterface $apiClient)
     {
         $this->apiClient = $apiClient;
@@ -41,7 +33,7 @@ class VideoManagerPro implements DataProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getOne(array $options)
+    public function getOne(array $options): ?Video
     {
         if (!isset($options['id'])) {
             // Simply fetch the first video from the collection, but without
@@ -75,26 +67,12 @@ class VideoManagerPro implements DataProviderInterface
         return new Video($video, $embedCode);
     }
 
-    /**
-     * CURRENTLY NOT IMPLEMENTED.
-     *
-     * @param array $options
-     *
-     * @return int
-     */
-    public function getCount(array $options)
+    public function getCount(array $options): int
     {
         return $this->apiClient->getCount($options['vm_id'], $this->createVideosRequestParameters($options));
     }
 
-    /**
-     * Converts array into VideosRequestParameters.
-     *
-     * @param array $options
-     *
-     * @return VideosRequestParameters
-     */
-    private function createVideosRequestParameters(array $options)
+    private function createVideosRequestParameters(array $options): VideosRequestParameters
     {
         $parameters = new VideosRequestParameters();
 

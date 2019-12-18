@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.2",
-        "movingimage/data-provider": "dev-CT-1573_Show_video_status_after_user_upload",
-        "movingimage/vmpro-api-client": "dev-CT-1573_Show_video_status_after_user_upload"
+        "movingimage/data-provider": "^4.0",
+        "movingimage/vmpro-api-client": "^4.0"
     },
     "autoload": {
         "psr-4": {

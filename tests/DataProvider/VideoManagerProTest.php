@@ -5,12 +5,14 @@ namespace MovingImage\DataProvider\Tests\VideoCollectionBundle\DataProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use MovingImage\Client\VMPro\Entity\VideosRequestParameters;
 use MovingImage\DataProvider\VideoManagerPro;
+use PHPUnit\Framework\TestCase;
+use MovingImage\Client\VMPro\Interfaces\ApiClientInterface;
 
-class VideoManagerProTest extends \PHPUnit_Framework_TestCase
+class VideoManagerProTest extends TestCase
 {
     public function testGetData()
     {
-        $client = $this->getMockBuilder('MovingImage\Client\VMPro\Interfaces\ApiClientInterface')->getMock();
+        $client = $this->getMockBuilder(ApiClientInterface::class)->getMock();
 
         $dataProvider = new VideoManagerPro($client);
 
@@ -31,7 +33,7 @@ class VideoManagerProTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getVideos')
             ->with($vm_id, $videoRequestParameters)
-            ->will($this->returnValue($arrayCollection));
+            ->willReturn($arrayCollection);
 
         $return = $dataProvider->getAll($options);
         $this->assertEquals($arrayCollection, $return);
